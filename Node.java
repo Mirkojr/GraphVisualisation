@@ -5,11 +5,15 @@ public class Node {
     public int x;
     public int y;
     public int valor;
-
+    public int nodeWidth = 30;
+    public int nodeHeight = 30;
+    public int radius = nodeWidth/2;
+    
     public Node(int valor){
         this.x = 0;
         this.y = 0;
         this.valor = valor;
+  
     }
 
 

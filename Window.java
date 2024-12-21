@@ -1,5 +1,7 @@
-import javax.swing.JButton;
+//Purpose: Class that creates the window for the graph
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 import java.awt.Graphics;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -7,25 +9,35 @@ import java.util.ArrayList;
 
 public class Window extends JFrame{
     private Grafo<Node> grafo;
-    private int nodeWidth;
-    private int nodeHeight;
+
+    private AnimatedButton updateGraphButton;
+    private JLabel tamanhoButao;
+
     public Window(int width, int height, Grafo<Node> grafo) {   
         setSize(width, height);
         this.grafo = grafo;
-        nodeWidth = 20;
-        nodeHeight = 20;
+        
         grafo.calculateNodePositions(getWidth(), getHeight());
-        JButton butao = new JButton("Mudar disposição ");
-        butao.setBounds(10, 10, 150, 30);
-        butao.addActionListener(e -> {
+    
+        updateGraphButton = new AnimatedButton("Mudar disposicao");
+        updateGraphButton.addActionListener(e -> {
             grafo.calculateNodePositions(getWidth(), getHeight());
             repaint();
         });
-        add(butao);
+        add(updateGraphButton);
+
+
+        tamanhoButao = new JLabel("Tamanho do butao");
+        tamanhoButao.setBounds(10, 50, 300, 30);
+        updateGraphButton.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                tamanhoButao.setText("Tamanho do butao: " + updateGraphButton.getWidth() + "x" + updateGraphButton.getHeight());
+            }
+        });
+        add(tamanhoButao);
+
         addComponentListener(new ComponentAdapter (){
-            //component adapter is a class that implements the component listener interface
-            //it is used to override only the methods of the interface that we need
-            //in this case, we only need the componentResized method
             @Override
             public void componentResized(ComponentEvent e){
                 grafo.calculateNodePositions(getWidth(), getHeight());
@@ -42,6 +54,7 @@ public class Window extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); 
         setVisible(true);
+        addMouseListener(new MouseListenerGraph(grafo));
     }
 
     private void drawNodes(Graphics g) {
@@ -50,8 +63,8 @@ public class Window extends JFrame{
         ArrayList<Node> nodes = grafo.getVertices();
         for (int i = 0; i < totalNodes; i++) {
             Node node = nodes.get(i);
-            g.fillOval(node.x - nodeWidth/2, node.y - nodeHeight/2, nodeWidth, nodeHeight); //draw node as a small circle
-            g.drawString(String.valueOf(node.valor), node.x - nodeWidth/2, node.y - nodeHeight); //draw node value
+            g.fillOval(node.x - node.nodeWidth/2, node.y - node.nodeHeight/2, node.nodeWidth, node.nodeHeight); //draw node as a small circle
+            g.drawString(String.valueOf(node.valor), node.x - node.nodeWidth/2, node.y - node.nodeHeight); //draw node value
         }
     }
 
