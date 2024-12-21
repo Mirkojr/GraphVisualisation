@@ -3,25 +3,48 @@ import java.awt.event.MouseEvent;
 
 public class MouseListenerGraph extends MouseAdapter{
     
-    Grafo<Node> grafo;
+    private Grafo<Node> grafo;
+    public Node nodeToMove;
+    public boolean dragging = false;
+
     MouseListenerGraph(Grafo<Node> grafo){
         super();
         this.grafo = grafo;
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mousePressed(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
         Node node = isNodeClicked(x, y);
         if (node != null) {
-            System.out.println("Node clicked at: (" + x + ", " + y + ")");
+            nodeToMove = node;
+            dragging = true;
         }
         else{
-            System.out.println("Node not clicked at: (" + x + ", " + y + ")");
         }
-        
     }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+        if(nodeToMove != null){
+            nodeToMove.x = x;
+            nodeToMove.y = y;
+            nodeToMove = null;
+            dragging = false;
+        }
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e){
+        if(dragging){
+            nodeToMove.x = e.getX();
+            nodeToMove.y = e.getY();
+        }
+    }
+
     private Node isNodeClicked(int x, int y) {
         for (Node node : grafo.getVertices()) {
             int nodeX = node.x;
