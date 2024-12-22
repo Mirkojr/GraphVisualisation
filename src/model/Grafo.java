@@ -1,4 +1,4 @@
-package src;
+package src.model;
 import java.util.*;
 
 public class Grafo<T extends Node>{

@@ -1,8 +1,8 @@
 import java.awt.Color;
 
-import src.Grafo;
-import src.Node;
-import src.Window;
+import src.model.Grafo;
+import src.model.Node;
+import src.view.Window;
 
 public class Main{
 

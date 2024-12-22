@@ -1,5 +1,10 @@
-package src;
+package src.view;
 import javax.swing.JPanel;
+
+import src.controller.MouseListenerGraph;
+import src.model.Grafo;
+import src.model.Node;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;

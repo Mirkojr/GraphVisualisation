@@ -1,7 +1,11 @@
-package src;
+package src.view;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+
+import src.Config;
+import src.model.Grafo;
+import src.model.Node;
 
 public class BarraSuperior extends JMenuBar{
     
@@ -41,11 +45,13 @@ public class BarraSuperior extends JMenuBar{
 
     public void addListeners(){
         addVertexItem.addActionListener(e -> {
-            Config.addVertexActive = true;
+            if(!Config.removeVertexActive){
+                Config.addVertexActive = true;
+            }
         });
 
         removeVertexItem.addActionListener(e -> {
-            System.out.println("Removendo vertice");
+            Config.removeVertexActive = true;
         });
 
         addEdgeItem.addActionListener(e -> {

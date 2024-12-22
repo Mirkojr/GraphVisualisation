@@ -1,5 +1,10 @@
-package src;
+package src.view;
 import javax.swing.*;
+
+import src.model.AnimatedButton;
+import src.model.Grafo;
+import src.model.Node;
+
 import java.awt.event.*;
 
 

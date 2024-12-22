@@ -1,4 +1,7 @@
 package src;
+
+import src.model.Node;
+
 public class Config {
     public static boolean addVertexActive = false;
     public static boolean addEdgeActive = false;
