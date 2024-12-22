@@ -1,4 +1,4 @@
-import java.util.*;
+import java.awt.Color;
 
 public class Main{
 
@@ -7,16 +7,16 @@ public class Main{
         System.out.println("Inicializando o programa...");
         
         // Adiciona vértices e arestas
-        Node node0 = new Node(0);
-        Node node1 = new Node(1);
-        Node node2 = new Node(2);
-        Node node3 = new Node(3);
-        Node node4 = new Node(4);
-        Node node5 = new Node(5);
-        Node node6 = new Node(6);
-        Node node7 = new Node(7);
-        Node node8 = new Node(8);
-        Node node9 = new Node(9);
+        Node node0 = new Node(0, Color.RED);
+        Node node1 = new Node(1, Color.BLACK);
+        Node node2 = new Node(2, Color.BLUE);
+        Node node3 = new Node(3, Color.GREEN);
+        Node node4 = new Node(4, Color.YELLOW);
+        Node node5 = new Node(5, Color.ORANGE);
+        Node node6 = new Node(6, Color.PINK);
+        Node node7 = new Node(7, Color.MAGENTA);
+        Node node8 = new Node(8, Color.CYAN);
+        Node node9 = new Node(9, Color.GRAY);
         grafo.addVertice(node0);
         grafo.addVertice(node1);
         grafo.addVertice(node2);
@@ -36,6 +36,7 @@ public class Main{
         grafo.addEdge(node6, node7, true);
         grafo.addEdge(node7, node8, true);
         // Imprime o grafo
+        @SuppressWarnings("unused")
         Window window = new Window(800, 600, grafo);
         System.out.println(grafo);
     }

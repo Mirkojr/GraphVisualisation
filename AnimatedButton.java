@@ -6,8 +6,8 @@ import java.awt.Color;
 
 public class AnimatedButton extends JButton {
 
-    private static final int BUTTON_WIDTH = 150;
-    private static final int BUTTON_HEIGHT = 30;
+    private int BUTTON_WIDTH;
+    private int BUTTON_HEIGHT;
     private static final int ANIMATION_DELAY = 10;
     private static final int SIZE_INCREMENT = 2;
     private static final float COLOR_TRANSITION_SPEED = 0.1f;
@@ -17,14 +17,19 @@ public class AnimatedButton extends JButton {
     private Color hoverColor;
     private float[] currentRGB;
 
-    public AnimatedButton() {
-        this("Animated Button");
-    }
-
-    public AnimatedButton(String text) {
+    public AnimatedButton(String text, int width, int height) {
         super(text);
+        this.BUTTON_WIDTH = width;
+        this.BUTTON_HEIGHT = height;
         initializeButton();
         addMouseListeners();
+    }
+
+    public void setSize(int width, int height) {
+        if(width > 50 && height > 20)
+            super.setSize(width, height);
+            BUTTON_WIDTH = width;
+            BUTTON_HEIGHT = height;
     }
 
     private void initializeButton() {
@@ -35,6 +40,7 @@ public class AnimatedButton extends JButton {
 
         currentRGB = new float[3];
     }
+
 
     private void addMouseListeners() {
         Timer expandTimer = createExpandTimer();
