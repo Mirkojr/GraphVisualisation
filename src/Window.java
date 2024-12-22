@@ -1,12 +1,12 @@
+package src;
 import javax.swing.*;
 import java.awt.event.*;
-import java.awt.Font;
+
 
 public class Window extends JFrame {
 
     private GraphPanel graphPanel;
     private AnimatedButton updateGraphButton;
-    private JLabel tamanhoButao;
 
     public Window(int width, int height, Grafo<Node> grafo) {
         setSize(width, height);
@@ -18,7 +18,7 @@ public class Window extends JFrame {
         graphPanel.setBounds(0, 0, width, height);
         graphPanel.setLayout(null);
 
-        updateGraphButton = new AnimatedButton("Mudar disposicao", getWidth()/ 4, getHeight()/10);
+        updateGraphButton = new AnimatedButton("Mudar disposicao", getWidth()/ 4, getHeight()/15);
         updateGraphButton.addActionListener(e -> {
             grafo.calculateNodePositions(getWidth(), getHeight());
             graphPanel.repaint();
@@ -36,6 +36,10 @@ public class Window extends JFrame {
                 graphPanel.repaint();
             }
         });
+
+        BarraSuperior barraSuperior = new BarraSuperior(grafo);
+        graphPanel.add(barraSuperior);
+        setJMenuBar(barraSuperior);
 
         initialize();
     }

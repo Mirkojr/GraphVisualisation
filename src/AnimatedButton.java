@@ -1,3 +1,4 @@
+package src;
 import javax.swing.JButton;
 import javax.swing.Timer;
 import java.awt.event.MouseAdapter;

@@ -1,3 +1,4 @@
+package src;
 import java.awt.Color;
 import java.util.Random;
 
@@ -20,6 +21,12 @@ public class Node {
     public Node(int valor, Color cor){
         this(valor);
         this.cor = cor;
+    }
+
+    public Node(int valor, Color cor, int x, int y){
+        this(valor, cor);
+        this.x = x;
+        this.y = y;
     }
 
 

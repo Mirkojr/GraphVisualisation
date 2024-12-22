@@ -1,3 +1,4 @@
+package src;
 import java.util.*;
 
 public class Grafo<T extends Node>{
@@ -35,6 +36,12 @@ public class Grafo<T extends Node>{
         }
     }
 
+    public void removeVertice(Node vertice){
+        grafo.remove(vertice);
+        for(T node: grafo.keySet()){
+            grafo.get(node).remove(vertice);
+        }
+    }
     public void calculateNodePositions(int width, int height) {
         int totalNodes = getVertices().size();
         int centerX = width / 2;

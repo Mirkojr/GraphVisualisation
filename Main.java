@@ -1,5 +1,9 @@
 import java.awt.Color;
 
+import src.Grafo;
+import src.Node;
+import src.Window;
+
 public class Main{
 
     public static void main(String[] args){
