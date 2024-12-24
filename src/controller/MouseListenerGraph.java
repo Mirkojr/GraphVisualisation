@@ -17,12 +17,9 @@ public class MouseListenerGraph extends MouseAdapter {
     private int offsetX, offsetY;
     private JPanel frame;
 
-    private boolean[] valuesConfig = {Config.addVertexActive, Config.addEdgeActive, Config.removeVertexActive};
-
     public MouseListenerGraph(JPanel frame, Grafo<Node> grafo) {
         this.grafo = grafo;
         this.frame = frame;
-        
         frame.addMouseListener(this);
         frame.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
@@ -33,9 +30,8 @@ public class MouseListenerGraph extends MouseAdapter {
                     frame.repaint();
                 }
             }
-        });
+        });   
     }
-
     @Override
     public void mousePressed(MouseEvent e) {
         if (Config.addEdgeActive) {
@@ -43,7 +39,9 @@ public class MouseListenerGraph extends MouseAdapter {
         } else if (Config.addVertexActive) {
             handleAddVertex(e);
         } else if (Config.removeVertexActive) {
-            handleRemoveVertex(e);
+            handleRemoveVertex(e);        
+        } else if (Config.removeEdgeActive){
+            handleRemoveEdge(e);
         } else {
             handleDragStart(e);
         }
@@ -65,19 +63,20 @@ public class MouseListenerGraph extends MouseAdapter {
             }
         } else {
             for (Node node : grafo.getVertices()) {
-                if (isMouseOverNode(e, node)) {
-                    if (node == Config.firstNode) {
-                        showWarning("Same node selected, please select another node");
-                        Config.firstNode = null;
-                        Config.addEdgeActive = false;
-                        return;
-                    }
-                    grafo.addEdge(Config.firstNode, node, true);
+                if (!isMouseOverNode(e, node)) continue;
+                    
+                if (node == Config.firstNode) {
+                    showWarning("Same node selected, please select another node");
                     Config.firstNode = null;
                     Config.addEdgeActive = false;
-                    frame.repaint();
                     return;
                 }
+
+                grafo.addEdge(Config.firstNode, node, true);
+                Config.firstNode = null;
+                Config.addEdgeActive = false;
+                frame.repaint();
+                return;
             }
         }
     }
@@ -100,6 +99,34 @@ public class MouseListenerGraph extends MouseAdapter {
         }
     }
 
+    private void handleRemoveEdge(MouseEvent e) {
+        if (Config.firstNode == null) {
+            for (Node node : grafo.getVertices()) {
+                if (isMouseOverNode(e, node)) {
+                    Config.firstNode = node;
+                    return;
+                }
+            }
+        } else {
+            for (Node node : grafo.getVertices()) {
+                if (!isMouseOverNode(e, node)) continue;
+                    
+                if (node == Config.firstNode) {
+                    showWarning("Same node selected, please select another node");
+                    Config.firstNode = null;
+                    Config.removeEdgeActive = false;
+                    return;
+                }
+
+                grafo.removeEdge(Config.firstNode, node, true);
+                Config.firstNode = null;
+                Config.removeEdgeActive = false;
+                frame.repaint();
+                return;
+            }
+        }
+    }
+    
     private void handleDragStart(MouseEvent e) {
         for (Node node : grafo.getVertices()) {
             if (isMouseOverNode(e, node)) {

@@ -35,13 +35,22 @@ public class Grafo<T extends Node>{
             grafo.get(destination).add(source);
         }
     }
-
+    public void removeEdge(T source, T destination, boolean bidirectional){
+        if(grafo.containsKey(source) && grafo.containsKey(destination)){
+            grafo.get(source).remove(destination);
+            if(bidirectional){
+                grafo.get(destination).remove(source);
+            }
+        }
+    }
+    
     public void removeVertice(Node vertice){
         grafo.remove(vertice);
-        for(T node: grafo.keySet()){
+        for(T node: grafo.keySet()){ //remove the vertice from all the adjacency lists
             grafo.get(node).remove(vertice);
         }
     }
+
     public void calculateNodePositions(int width, int height) {
         int totalNodes = getVertices().size();
         int centerX = width / 2;

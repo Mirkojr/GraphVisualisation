@@ -1,14 +1,16 @@
 import java.awt.Color;
 
+import src.controller.MainController;
 import src.model.Grafo;
 import src.model.Node;
+import src.view.GraphPanel;
 import src.view.Window;
 
 public class Main{
 
     public static void main(String[] args){
-        Grafo<Node> grafo = new Grafo<>();
         System.out.println("Inicializando o programa...");
+        Grafo<Node> grafo = new Grafo<>();
         
         // Adiciona vértices e arestas
         Node node0 = new Node(0, Color.RED);
@@ -40,8 +42,11 @@ public class Main{
         grafo.addEdge(node6, node7, true);
         grafo.addEdge(node7, node8, true);
         // Imprime o grafo
-        @SuppressWarnings("unused")
-        Window window = new Window(800, 600, grafo);
+        GraphPanel graphPanel = new GraphPanel(grafo);
+        Window window = new Window(800, 600, graphPanel);
+        
+        MainController mainController = new MainController(window, grafo, graphPanel);
+        mainController.run();
         System.out.println(grafo);
     }
 }

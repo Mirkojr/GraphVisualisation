@@ -1,4 +1,7 @@
 package src.view;
+import java.awt.Color;
+import java.awt.Font;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -15,6 +18,8 @@ public class BarraSuperior extends JMenuBar{
     JMenuItem addEdgeItem;
     JMenuItem addVertexItem;
     JMenuItem removeVertexItem;
+    JMenuItem removeEdgeItem;
+
     Grafo<Node> grafo;
 
     public BarraSuperior(Grafo<Node> grafo){
@@ -27,18 +32,29 @@ public class BarraSuperior extends JMenuBar{
         addEdgeItem = new JMenuItem("Adicionar Aresta");
         addVertexItem = new JMenuItem("Adicionar Vertice");
         removeVertexItem = new JMenuItem("Remover Vertice");
-        addVertexItem.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 12));
-        removeVertexItem.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 12));
-        addVertexItem.setForeground(java.awt.Color.BLUE);
-        removeVertexItem.setForeground(java.awt.Color.RED);
+        removeEdgeItem = new JMenuItem("Remover Aresta");
+        
+        Font fontePadrao = new Font("Arial", java.awt.Font.BOLD, 12);
+        
+        addEdgeItem.setForeground(Color.BLUE);
+        addEdgeItem.setFont(fontePadrao);
+
+        addVertexItem.setFont(fontePadrao);
+        addVertexItem.setForeground(Color.BLUE);
+
+        removeVertexItem.setFont(fontePadrao);
+        removeVertexItem.setForeground(Color.RED);
+        
+        removeEdgeItem.setFont(fontePadrao);
+        removeEdgeItem.setForeground(Color.RED);
+
         vertexOptions.add(addVertexItem);
         vertexOptions.add(removeVertexItem);
-        vertexOptions.setBounds(200, 0, 100, 20);
-        add(vertexOptions);
-
-        addEdgeItem.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 12));
-        addEdgeItem.setForeground(java.awt.Color.BLUE);
+        
         edgeOptions.add(addEdgeItem);
+        edgeOptions.add(removeEdgeItem);
+        
+        add(vertexOptions);
         add(edgeOptions);
         addListeners();
     }
@@ -56,6 +72,10 @@ public class BarraSuperior extends JMenuBar{
 
         addEdgeItem.addActionListener(e -> {
             Config.addEdgeActive = true;
+        });
+
+        removeEdgeItem.addActionListener(e -> {
+            Config.removeEdgeActive = true;
         });
     }
     

@@ -20,6 +20,7 @@ public class GraphPanel extends JPanel {
     public GraphPanel(Grafo<Node> grafo) {
         this.grafo = grafo;
         setBackground(Color.WHITE);
+        @SuppressWarnings("unused")
         MouseListenerGraph mouseListener = new MouseListenerGraph(this, grafo);
     }
 

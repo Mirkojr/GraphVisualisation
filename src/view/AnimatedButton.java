@@ -1,4 +1,4 @@
-package src.model;
+package src.view;
 import javax.swing.JButton;
 import javax.swing.Timer;
 import java.awt.event.MouseAdapter;
